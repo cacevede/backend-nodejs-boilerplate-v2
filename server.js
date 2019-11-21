@@ -5,6 +5,7 @@ const express = require('express');
 const morgan = require('morgan');
 
 /** REQUIRED PROYECT FILES */
+const { runServer } = require('./scripts/serverScript');
 const { config } = require('./configs/config');
 const { 
     logErrors,
@@ -44,9 +45,7 @@ server.use(errorHandler);
 server.use(config.apiVersion, require('./routes/router'));
 
 /** START SERVER */
-server.listen(server.get('port'), () => {
-    console.log('Server running on: http://localhost:', server.get('port'));
-});
+runServer(server, server.get('port'));
 
 /** PROCCESS HANDLER ERRORS */
 process.on('unhandledRejection', (error) => {
