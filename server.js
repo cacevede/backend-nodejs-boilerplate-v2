@@ -6,6 +6,7 @@ const morgan = require('morgan');
 
 /** REQUIRED PROYECT FILES */
 const { runServer } = require('./scripts/serverScript');
+const { winstonLogger } = require('./configs/winstonConfig');
 const { config } = require('./configs/config');
 const { 
     logErrors,
@@ -24,8 +25,8 @@ server.set('port', config.port || 3005);
 
 /** MIDDLEWARES */
     
-    /** Morgan Instance */
-server.use(morgan('dev'));
+    /** Morgan Instance and Winston Integration */
+server.use(morgan('combined'), { stream: winstonLogger().stream });
     
     /** Sequelize test database SQL connection */
 server.use(databaseConValidator.testSQLConnection());
