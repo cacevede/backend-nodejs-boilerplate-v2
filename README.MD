@@ -29,7 +29,49 @@ Comming soon
 Comming soon
 
 ```
-
+├── components
+│    └── newComponent
+│        ├── model.js
+│        ├── router.js
+│        ├── service.js
+│        └── test.js
+├── configs
+│    ├── config.js
+│    ├── databaseConnection.js
+│    └── winstonConfig.js
+├── logs
+│    └── example.log
+├── routes
+│    └── router.js
+├── scripts
+│    └── serverScript.js
+├── utils
+│    ├── middlewares
+│    │    └── databaseConValidator.js
+│    │    ├── errorsHandler.js
+│    │    ├── notFoundHandler.js
+│    │    ├── scopeValidationHandler.js
+│    │    ├── testMiddleware.js
+│    │    └── validationSchemaHandler.js
+│    ├── mocks
+│    │    ├── someData.js
+│    │    └── someFunctions.js
+│    ├── schemas
+│    │    └── exampleSchema.js
+│    ├── strategies
+│    │    └── someStrategie.js
+│    ├── crypter.js
+│    ├── testServer.js
+│    ├── time.js
+│    └── tokenGenerator.js
+├── .env
+├── .eslintrc.json
+├── .gitignore
+├── .prettierrc.json
+├── package-lock.json
+├── package.json
+├── README.MD
+└── server.js
 ```
 
 ## Default Package
