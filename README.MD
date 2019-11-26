@@ -21,6 +21,58 @@ Some conventions are established, which seek to work general aspects in a homoge
 
 ## Commit Rules
 
+A well-crafted Git commit message is the best way to communicate context about a change to fellow developers (and indeed to their future selves). A `diff` will tell you what changed, but only the _commit message_ can properly tell you why.
+
+A team’s approach to its commit log should be no different. In order to create a useful revision history, teams should first agree on a commit message convention that defines at least the following three things:
+
+- Style
+- Content
+- Metadata
+
+We will follow **"The seven rules of a great Git commit message"**. You can click con each rule for see detailed info.
+
+1. [Separate subject from body with a blank line](https://chris.beams.io/posts/git-commit/#separate)
+2. [Limit the subject line to 50 characters](https://chris.beams.io/posts/git-commit/#limit-50)
+3. [Capitalize the subject line](https://chris.beams.io/posts/git-commit/#capitalize)
+4. [Do not end the subject line with a period](https://chris.beams.io/posts/git-commit/#end)
+5. [Use the imperative mood in the subject line](https://chris.beams.io/posts/git-commit/#imperative)
+6. [Wrap the body at 72 characters](https://chris.beams.io/posts/git-commit/#wrap-72)
+7. [Use the body to explain what and why vs. how](https://chris.beams.io/posts/git-commit/#why-not-how)
+8. **Add additional info at the bottom of the body**
+
+#### Here's an example
+
+```
+Summarize changes in around 50 characters or less
+
+More detailed explanatory text, if necessary. Wrap it to about 72
+characters or so. In some contexts, the first line is treated as the
+subject of the commit and the rest of the text as the body. The
+blank line separating the summary from the body is critical (unless
+you omit the body entirely); various tools like `log`, `shortlog`
+and `rebase` can get confused if you run the two together.
+
+Explain the problem that this commit is solving. Focus on why you
+are making this change as opposed to how (the code explains that).
+Are there side effects or other unintuitive consequences of this
+change? Here's the place to explain them.
+
+Further paragraphs come after blank lines.
+
+ - Bullet points are okay, too
+
+ - Use a hyphen for the bullet, preceded
+   by a single space, with blank lines in between.
+
+If you use an issue tracker, put references to them at the bottom,
+like this:
+
+Resolves: #123
+See also: #456, #789
+Reported-by: whoever-reported-it
+Signed-off-by: Your Name <you@example.com> or <nickname>
+```
+
 ## File Structure
 
 Comming soon
