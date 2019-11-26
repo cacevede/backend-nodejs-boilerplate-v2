@@ -21,8 +21,6 @@ Some conventions are established, which seek to work general aspects in a homoge
 
 ## Commit Rules
 
-Comming soon
-
 ## File Structure
 
 Comming soon
@@ -95,20 +93,52 @@ Comming soon
 - [**eslint (dev)**](https://eslint.org/)
   ESLint is a tool for identifying and reporting on patterns found in JavaScript code. Useful for keep our code clean and well structured. Note: a VSCode plugin is needed and also a eslint config file to share between projects.
 
+- [**prettier (dev)**](https://prettier.io/)
+  Prettier is an opinionated code formatter. It removes all original styling and ensures that all outputted code conforms to a consistent style.
+
 ### Database and Authentication
 
-- [**sequelize (SQL)**]()
+- [**sequelize (SQL)**](https://sequelize.org/)
   Sequelize is a promise-based Node.js ORM for Postgres, MySQL, MariaDB, SQLite and Microsoft SQL Server. It features solid transaction support, relations, eager and lazy loading, read replication and more. An ORM facilitate us to manipulate data from a database using an object-oriented paradigm without the need of use SQL directly.
 
-- [**mongoose (NoSQL)**]()
+- [**mongoose (NoSQL)**](https://mongoosejs.com/)
   Mongoose provides a straight-forward, schema-based solution to model our application data. It includes built-in type casting, validation, query building, business logic hooks and more, out of the box. This is maybe the best tool for handling data coming from MongoDB database.
 
-- [**jwt**]()
+- [**jwt**](https://jwt.io/)
   JSON Web Tokens are an open, industry standard RFC 7519 method for representing claims securely between two parties. It is useful and needed for authentication and also encryption of our data during HTTP POST request and other web services and methods.
 
-- [**bcrypt / bcryptjs**]()
+- [**bcrypt / bcryptjs**](https://www.npmjs.com/package/bcrypt)
   A library that helps us hash passwords. bcrypt allows us to choose our balance of speed and security for keep our password safe from attacks.
 
-- [**passport.js**]()
+- [**passport**](http://www.passportjs.org/)
   Passport is authentication middleware for Node.js. Extremely flexible and modular, Passport can be unobtrusively dropped in to any Express-based web application. It will be useful for handle username / password authentication or whatever strategie (Facebook, Google, Twitter) used by the client.
   hapi/joi
+
+### Dates and Time handlers
+
+- [**moment**](https://momentjs.com/)
+  Parse, validate, manipulate, and display dates and times in JavaScript. Moment offers a huge set of date functions that ease our job handling dates and times. Special attention with moment(undefined) when debugging, it returns a date.
+
+- [**date-fns**](https://date-fns.org/)
+  Modern JavaScript date utility library that provides the most comprehensive, yet simple and consistent toolset for manipulating JavaScript dates in a browser & Node.js
+
+**Note:** we have to be careful when choosing a date library. It may vary depending of project's nature. There are other libraries that could be better in accordance with our needs, e.g., DayJS or JS-Joda.
+
+### Error handlers
+
+- [**@hapi/boom**](https://www.npmjs.com/package/@hapi/boom)
+  boom provides a set of utilities for returning HTTP errors. Each utility returns a Boom error response object which includes a variety of useful properties.
+
+### Web services and Security
+
+- [**helmet**](https://helmetjs.github.io/)
+  Helmet helps you secure your Express apps by setting various HTTP headers. It’s not a silver bullet, but it can help!
+- [**cors**](https://www.npmjs.com/package/cors)
+  CORS is a node.js package for providing a Connect/Express middleware that can be used to enable CORS with various options.
+
+### Testing
+
+- [**jest (dev)**](https://jestjs.io/)
+  `jest` is a delightful JavaScript Testing Framework with a focus on simplicity.
+- [**supertest (dev)**](https://github.com/visionmedia/supertest)
+  The motivation with this module is to provide a high-level abstraction for testing HTTP, while still allowing you to drop down to the lower-level API provided by superagent.
