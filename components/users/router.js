@@ -1,13 +1,13 @@
 const router = require('express').Router();
 
 // Here call the router file
-const userServices = require('./service');
+const userService = require('./service');
 
 // Here call the middlewares required
-const exampleMiddleware = require('../../utils/middlewares/testMiddleware');
+const exampleMiddleware = require('../../utils/middlewares/exampleMiddleware');
 
 /** GET ROUTES COMPONENT */
-router.get('/sayhiuser', exampleMiddleware, userServices.testService);
+router.get('/sayhiuser', exampleMiddleware.getMessageFromMiddleware, userService.testService);
 
 /** POST ROUTES COMPONENT */
 
@@ -17,4 +17,4 @@ router.get('/sayhiuser', exampleMiddleware, userServices.testService);
 
 /** DELETE ROUTES COMPONENT */
 
-module.exports = { router };
+module.exports = router;
