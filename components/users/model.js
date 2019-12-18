@@ -1,4 +1,5 @@
 // SQL model definition throught sequelize ORM
+/**
 const Sequelize = require('sequelize');
 const databaseConnection = require('../../configs/databaseConnection');
 
@@ -22,3 +23,4 @@ const Users = databaseConnection.getSequelizeSQLConnection.define('Users', {
 });
  
 module.exports = Users;
+*/
