@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 
 const databaseConnValidator = { };
 
-databaseConnValidator.testSQLConnection = (res) => {
+databaseConnValidator.testSQLConnection = (req, res) => {
     getSequelizeConnection
         .authenticate()
         .then(() => {
@@ -21,7 +21,7 @@ databaseConnValidator.testSQLConnection = (res) => {
         });
 };
 
-databaseConnValidator.testNoSQLConnection = (res) => {
+databaseConnValidator.testNoSQLConnection = (req, res) => {
     mongoose.connection.on('error', (error) => {
         res.status(500).json({
             data: 'NoSQL database connection failed',
