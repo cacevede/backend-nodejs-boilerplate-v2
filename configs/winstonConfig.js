@@ -1,3 +1,5 @@
+'use strict'
+
 const winston = require('winston');
 
 const winstonLevels = {
@@ -28,9 +30,7 @@ const winstonOptions = {
     http: {}
 }
 
-const winstonConfig = { };
-
-winstonConfig.winstonLogger = () => {
+module.exports = function winstonLogger () {
     const logger = winston.createLogger({
         transports: [
             new winston.transports.File(winstonOptions.file),
@@ -40,10 +40,8 @@ winstonConfig.winstonLogger = () => {
     });
 
     logger.stream = {
-        write: (message) => { logger.info(message); }
+        write: (message) => logger.info(message)
     };
 
     return logger;
 }
-
-module.exports = winstonConfig;

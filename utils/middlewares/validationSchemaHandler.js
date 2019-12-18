@@ -1,18 +1,19 @@
+'use strict'
+
 const boom = require('@hapi/boom');
 const joi = require('@hapi/joi');
 
-const schemaValidatorHandler = { };
-
-schemaValidatorHandler.validate = (data, schema) => {
+function validate (data, schema) {
     const { error } = joi.validate(data, schema);
     return error;
-};
+}
 
-schemaValidatorHandler.validationHandler = (schema) => {
-    return (req, res, next) => {
-        const { error } = schemaValidatorHandler.validate(req.body, schema);
-        error ? next(boom.badRequest(error)) : next();
+function validationHandler(schema, check = 'body') {
+    return function (req, res, next) {
+      const error = validate(req[check], schema);
+  
+      error ? next(boom.badRequest(error)) : next();
     }
-};
+}
 
-module.exports = schemaValidatorHandler;
+module.exports = validationHandler;

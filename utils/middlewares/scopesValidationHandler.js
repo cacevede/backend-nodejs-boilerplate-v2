@@ -1,8 +1,8 @@
+'use strict'
+
 const boom = require('@hapi/boom');
 
-const scopesHandler = { };
-
-scopesHandler.scopesValidation = (allowedScopes) => {
+module.exports = function scopesValidation (allowedScopes) {
     return (req, res, next) => {
         if (!req.user || (req.user && !req.user.scopes)) {
             next(boom.unauthorized('Missing scopes'));
@@ -15,5 +15,3 @@ scopesHandler.scopesValidation = (allowedScopes) => {
         hasAccess ? next() : next(boom.unauthorized('Insufficient scopes'));
     };
 };
-
-module.exports = scopesHandler;

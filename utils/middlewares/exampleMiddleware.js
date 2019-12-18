@@ -1,11 +1,6 @@
-const testMiddleware = { };
+'use strict'
 
-testMiddleware.getMessageFromMiddleware = (req, res, next) => {
-    next(
-        res.status(200).json({
-            data: 'This is a message from the Middleware'
-        })
-    );
+module.exports = function getMessageFromMiddleware (req, res, next) {
+    // Do something
+    next();
 };
-
-module.exports = testMiddleware;

@@ -1,43 +1,38 @@
+'use strict'
+
 //SQL Database connection throught Sequelize ORM
 const Sequelize = require('sequelize');
 const mongoose = require('mongoose');
 
 const config = require('./config');
 
-const databaseConnection = { };
+async function getSequelizeSQLConnection () {
+    const sequelizeDatabaseConnection = new Sequelize(
+        config.dbName,
+        config.dbUsername,
+        config.dbPassword,
+        {
+            host: config.dbHost,
+            dialect: config.dbDialect
+        }
+    );
 
-databaseConnection.getSequelizeSQLConnection = async () => {
-    try {
-        const sequelizeDatabaseConnection = new Sequelize(
-            config.dbName,
-            config.dbUsername,
-            config.dbPassword,
-            {
-                host: config.dbHost,
-                dialect: config.dbDialect
-            }
-        );
-    
-        return sequelizeDatabaseConnection;
-    } catch (error) {
-        console.log(error);
-    }
+    return sequelizeDatabaseConnection;
 };
 
-databaseConnection.getMongooseConnection = async () => {
+async function getMongooseConnection  () {
     let mongooseDatabaseConnection = null;
     const mongooseUriConnection = `mongodb://${config.dbUsername}:${config.dbPassword}@${config.dbHost}:${config.port}/${config.dbName}`;
 
-    try {
-        mongooseDatabaseConnection = await mongoose.connect(mongooseUriConnection, {
-            useNewUrlParser: true,
-            poolSize: 10 
-        });
-    } catch (error) {
-        console.log(error);
-    }
+    mongooseDatabaseConnection = await mongoose.connect(mongooseUriConnection, {
+        useNewUrlParser: true,
+        poolSize: 10 
+    });
 
     return mongooseDatabaseConnection;
 };
 
-module.exports = databaseConnection;
+module.exports = {
+    getSequelizeSQLConnection,
+    getMongooseConnection
+};

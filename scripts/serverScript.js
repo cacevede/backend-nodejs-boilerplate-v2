@@ -1,9 +1,7 @@
-const server = { };
+'use strict'
 
-server.runServer = (expressInstance, serverPort) => {
+module.exports = function runServer (expressInstance, serverPort) {
     expressInstance.listen(serverPort, () => {
         console.log(`Server running on: http://localhost:${serverPort}`);
     });
 };
-
-module.exports = server;

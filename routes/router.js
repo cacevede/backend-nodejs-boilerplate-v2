@@ -1,3 +1,5 @@
+'use strict'
+
 /** REQUIRED PROD DEPENDENCIES */
 const express = require('express');
 

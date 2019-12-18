@@ -1,13 +1,16 @@
+'use strict'
+
 const router = require('express').Router();
+const { catchErrors } = require('../../utils/middlewares/errorHandlers')
 
 // Here call the router file
-const userService = require('./service');
+const { testService } = require('./service');
 
 // Here call the middlewares required
 const exampleMiddleware = require('../../utils/middlewares/exampleMiddleware');
 
 /** GET ROUTES COMPONENT */
-router.get('/sayhiuser', exampleMiddleware.getMessageFromMiddleware, userService.testService);
+router.get('/sayhiuser', exampleMiddleware, catchErrors(testService));
 
 /** POST ROUTES COMPONENT */
 

@@ -1,9 +1,9 @@
-const express = require('express')
-const supertest = require('supertest')
+'use strict'
 
-const testServer = { };
+const express = require('express');
+const supertest = require('supertest');
 
-testServer.makeTestServer = (route) => {
+function makeTestServer (route) {
     const server = express();
     route(server);
     return supertest(server);
@@ -15,4 +15,6 @@ testServer.makeTestServer = (route) => {
  * 
  */
 
- module.exports = testServer;
+ module.exports = {
+    makeTestServer
+ };

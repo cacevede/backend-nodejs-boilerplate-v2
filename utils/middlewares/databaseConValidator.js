@@ -1,11 +1,10 @@
 /** VALIDATE DATABASE CONNECTION */
+'use strict'
 
 const { getSequelizeConnection } = require('../../configs/databaseConnection');
 const mongoose = require('mongoose');
 
-const databaseConnValidator = { };
-
-databaseConnValidator.testSQLConnection = (req, res) => {
+function testSQLConnection (req, res) {
     getSequelizeConnection
         .authenticate()
         .then(() => {
@@ -21,7 +20,7 @@ databaseConnValidator.testSQLConnection = (req, res) => {
         });
 };
 
-databaseConnValidator.testNoSQLConnection = (req, res) => {
+function testNoSQLConnection (req, res) {
     mongoose.connection.on('error', (error) => {
         res.status(500).json({
             data: 'NoSQL database connection failed',
@@ -30,4 +29,7 @@ databaseConnValidator.testNoSQLConnection = (req, res) => {
     });
 }
 
-module.exports = databaseConnValidator;
+module.exports = {
+    testSQLConnection,
+    testNoSQLConnection
+};

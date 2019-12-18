@@ -8,8 +8,8 @@
     "test": "test"
   },
   "scripts": {
-    "dev": "DEBUG=app:* nodemon index",
-    "start": "node server",
+    "dev": "DEBUG=app:* nodemon server",
+    "start": "NODE_ENV=production node server",
     "test": "mocha --exit",
     "cover": "nyc npm run test",
     "report": "nyc report --reporter=html && open coverage/index.html"

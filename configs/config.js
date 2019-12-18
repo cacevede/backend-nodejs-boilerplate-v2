@@ -1,3 +1,5 @@
+'use strict'
+
 require('dotenv').config();
 
 const config = {
@@ -13,7 +15,9 @@ const config = {
     authJwtSecret: process.env.AUTH_JWT_SECRET,
     expireTimeToken: process.env.EXPIRE_JWT_TOKEN_TIME,
     saltCrypt: process.env.SALT_ROUNDS,
-    apiVersion: process.env.API_VERSION
+    apiVersion: process.env.API_VERSION,
+    fiveMinutesInSeconds: process.env.FIVE_MINUTES_IN_SECONDS,
+    sixtyMinutesInSeconds: process.env.SIXTY_MINUTES_IN_SECONDS
 };
 
 module.exports = { config };

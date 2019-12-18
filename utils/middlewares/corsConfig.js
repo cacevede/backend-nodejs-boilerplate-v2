@@ -1,8 +1,8 @@
+'use strict'
+
 const { config } = require('../../configs/config');
 
-const corsConfig = { };
-
-corsConfig.setCorsConfig = () => {
+module.exports = function setCorsConfig () {
     let whiteDomainList = [config.corsProduction, config.corsDevelopment];
     let corsOptionsDelegate = (req, callback) => {
         let corsOptions;
@@ -17,5 +17,3 @@ corsConfig.setCorsConfig = () => {
 
     return corsOptionsDelegate;
 };
-
-module.exports = corsConfig;

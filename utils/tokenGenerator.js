@@ -1,27 +1,22 @@
+'use strict'
+
 const jwt = require('jsonwebtoken');
+const { config } = require('../configs/config')
 
-const tokenGenerator = {};
-
-tokenGenerator.generateToken = async (userName, userPassword) => {
+module.exports = async function generateToken (userName, userPassword) {
   const payloadTokenData = {
     check: true,
-    userName: userName,
-    userPassword: userPassword
+    userName,
+    userPassword
   };
 
-  try {
-    const token = await jwt.sign(
-      payloadTokenData,
-      process.env.AUTH_JWT_SECRET,
-      {
-        expiresIn: process.env.EXPIRE_JWT_TOKEN_TIME
-      }
-    );
+  const token = await jwt.sign(
+    payloadTokenData,
+    config.authJwtSecret,
+    {
+      expiresIn: config.expireTimeToken
+    }
+  );
     
-    return token;
-  } catch (error) {
-    console.log(error);
-  }
+  return token;
 };
-
-module.exports = tokenGenerator;

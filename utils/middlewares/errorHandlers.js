@@ -1,27 +1,38 @@
+'use strict'
+
 const { config } = require('../../configs/config');
 const boom = require('@hapi/boom');
 
-const errorHandler = { };
+function catchErrors (fn) {
+    return (req, res, next) => {
+      return fn(req, res, next).catch(next);
+    };
+};
 
-errorHandler.withErrorStack = (error, stack) => {
+function withErrorStack (error, stack) {
     if (config.dev) {
         return { error, stack };
     }
     return error;
 };
 
-errorHandler.logErrors = (error, req, res, next) => {
-    //console.log(error);
+function logErrors (error, req, res, next) {
+    console.log(error);
     next(error)
 };
 
-errorHandler.wrapErrors = (error, req, res, next) => {
+function wrapErrors (error, req, res, next) {
     !error.isBoom ? next(boom.badImplementation(error)) : next(error);
 };
 
-errorHandler.errorHandler = (error, req, res) => {
+function errorHandler (error, req, res) {
     const { statusCode, payload } = error;
-    res.status(statusCode).json(errorHandler.withErrorStack(payload, error.stack));
+    res.status(statusCode).json(withErrorStack(payload, error.stack));
 };
 
-module.exports = errorHandler;
+module.exports = {
+    catchErrors,
+    logErrors,
+    wrapErrors,
+    errorHandler
+};

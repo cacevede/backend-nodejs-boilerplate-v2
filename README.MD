@@ -180,6 +180,8 @@ Comming soon
 
 ### Error handlers
 
+**Note:** This boilerplate won't use Try/Catch block in order handle errors. Instead, it will use a **high order function** called **"catchError()"** in replace of it, wrapping a certain function that wants to be error handled using high-top pratices. This **catchError() function** takes a function as argument, and returns a function that resolves a promise, so what **.catch()** can be chained at the end of that promise in order to handle a possible error. **WARNING:** This **catchError() function** must be used ONLY if the wrapped function returns a promise.
+
 - [**@hapi/boom**](https://www.npmjs.com/package/@hapi/boom)
   boom provides a set of utilities for returning HTTP errors. Each utility returns a Boom error response object which includes a variety of useful properties.
 
