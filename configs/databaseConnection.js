@@ -1,28 +1,43 @@
 //SQL Database connection throught Sequelize ORM
 const Sequelize = require('sequelize');
+const mongoose = require('mongoose');
+
 const config = require('./config');
 
 const databaseConnection = { };
 
-databaseConnection.getSequelizeSQLConnection = () => {
-    const sequelizeDatabaseConnection = new Sequelize(
-        config.dbName,
-        config.dbUsername,
-        config.dbPassword,
-        {
-            host: config.dbHost,
-            dialect: config.dbDialect
-            /**
-             * Here can be setted another database connection params
-             * like the connection number pool. See Sequelize documentation
-             * Camilo 11/20/2019
-             */
-        }
-    );
-
-    return sequelizeDatabaseConnection;
+databaseConnection.getSequelizeSQLConnection = async () => {
+    try {
+        const sequelizeDatabaseConnection = new Sequelize(
+            config.dbName,
+            config.dbUsername,
+            config.dbPassword,
+            {
+                host: config.dbHost,
+                dialect: config.dbDialect
+            }
+        );
+    
+        return sequelizeDatabaseConnection;
+    } catch (error) {
+        console.log(error);
+    }
 };
 
-//Here must add connection to No-SQL database
+databaseConnection.getMongooseConnection = async () => {
+    let mongooseDatabaseConnection = null;
+    const mongooseUriConnection = `mongodb://${config.dbUsername}:${config.dbPassword}@${config.dbHost}:${config.port}/${config.dbName}`;
 
-module.exports = { databaseConnection };
+    try {
+        mongooseDatabaseConnection = await mongoose.connect(mongooseUriConnection, {
+            useNewUrlParser: true,
+            poolSize: 10 
+        });
+    } catch (error) {
+        console.log(error);
+    }
+
+    return mongooseDatabaseConnection;
+};
+
+module.exports = databaseConnection;
