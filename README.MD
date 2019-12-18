@@ -198,3 +198,10 @@ Comming soon
   `jest` is a delightful JavaScript Testing Framework with a focus on simplicity.
 - [**supertest (dev)**](https://github.com/visionmedia/supertest)
   The motivation with this module is to provide a high-level abstraction for testing HTTP, while still allowing you to drop down to the lower-level API provided by superagent.
+
+## Development and Debug Tools
+
+- [**chalk**](https://github.com/chalk/chalk#readme)
+  `chalk` makes terminal string styling done right
+- [**husky**](https://github.com/chalk/chalk#readme)
+  Husky can prevent bad git commit, git push, etc.
