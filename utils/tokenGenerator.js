@@ -20,7 +20,6 @@ tokenGenerator.generateToken = async (userName, userPassword) => {
     
     return token;
   } catch (error) {
-    //Here can handle in a better way this error -- Camilo 11/15/2019
     console.log(error);
   }
 };
