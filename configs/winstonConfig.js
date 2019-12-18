@@ -1,13 +1,13 @@
 const winston = require('winston');
 
 const winstonLevels = {
-    error: 0, 
-    warn: 1, 
-    info: 2, 
-    verbose: 3, 
-    debug: 4, 
+    error: 0,
+    warn: 1,
+    info: 2,
+    verbose: 3,
+    debeug: 4,
     silly: 5
-};
+}
 
 const winstonOptions = {
     file: {
@@ -26,12 +26,12 @@ const winstonOptions = {
         colorize: true
     },
     http: {}
-};
+}
 
 const winstonConfig = { };
 
 winstonConfig.winstonLogger = () => {
-    const logger = new winston.Logger({
+    const logger = winston.createLogger({
         transports: [
             new winston.transports.File(winstonOptions.file),
             new winston.transports.Console(winstonOptions.console)
@@ -40,10 +40,10 @@ winstonConfig.winstonLogger = () => {
     });
 
     logger.stream = {
-        write: (message, encoding) => { logger.info(message); }
+        write: (message) => { logger.info(message); }
     };
 
     return logger;
-};
+}
 
 module.exports = winstonConfig;
