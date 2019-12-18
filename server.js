@@ -1,5 +1,6 @@
 /** REQUIRED PROD DEPENDENCIES */
 const express = require('express');
+const cors = require('cors');
 
 /** REQUIRED DEV DEPENDENCIES */
 const morgan = require('morgan');
@@ -10,6 +11,7 @@ const { winstonLogger } = require('./configs/winstonConfig');
 const { runServer } = require('./scripts/serverScript');
 const { notFoundHandler } = require('./utils/middlewares/notFoundHandler');
 const { logErrors, wrapErrors, errorHandler } = require('./utils/middlewares/errorHandlers');
+//const { setCorsConfig } = require('./utils/middlewares/corsConfig');
 
     /** SQL Database test */
 //const databaseConValidator = require('./utils/middlewares/databaseConValidator');
@@ -21,7 +23,10 @@ const server = express();
 server.set('port', config.port || 3005);
 
 /** MIDDLEWARES */
-    
+
+    /** CORS config */
+server.use(cors());
+
     /** Morgan Instance and Winston Integration */
 server.use(morgan('combined', { stream: winstonLogger().stream }));
     
@@ -32,8 +37,6 @@ server.use(morgan('combined', { stream: winstonLogger().stream }));
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 
-    /** Catch 404 */
-server.use(notFoundHandler);
     /** Error handler middlewares */
 server.use(logErrors);
 server.use(wrapErrors);
@@ -41,6 +44,9 @@ server.use(errorHandler);
 
 /** ROUTES */
 server.use(config.apiVersion, require('./routes/router'));
+
+    /** Not Found Handler - 404 */
+server.use(notFoundHandler);
 
 /** START SERVER */
 runServer(server, server.get('port'));
