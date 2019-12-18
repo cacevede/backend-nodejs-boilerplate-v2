@@ -20,7 +20,7 @@ errorHandler.wrapErrors = (error, req, res, next) => {
 };
 
 errorHandler.errorHandler = (error, req, res) => {
-    const { output: { statusCode, payload } } = error;
+    const { statusCode, payload } = error;
     res.status(statusCode).json(errorHandler.withErrorStack(payload, error.stack));
 };
 
