@@ -11,7 +11,7 @@ errorHandler.withErrorStack = (error, stack) => {
 };
 
 errorHandler.logErrors = (error, req, res, next) => {
-    console.log(error);
+    //console.log(error);
     next(error)
 };
 
@@ -19,11 +19,9 @@ errorHandler.wrapErrors = (error, req, res, next) => {
     !error.isBoom ? next(boom.badImplementation(error)) : next(error);
 };
 
-errorHandler.errorHandler = (err, req, res, next) => {
-    const { output: { statusCode, payload } } = err;
-
-    res.status(statusCode);
-    res.json(errorHandler.withErrorStack(payload, error.stack));
+errorHandler.errorHandler = (error, req, res) => {
+    const { output: { statusCode, payload } } = error;
+    res.status(statusCode).json(errorHandler.withErrorStack(payload, error.stack));
 };
 
 module.exports = errorHandler;

@@ -8,10 +8,9 @@ schemaValidatorHandler.validate = (data, schema) => {
     return error;
 };
 
-schemaValidatorHandler.validationHandler = (schema, check = 'body') => {
+schemaValidatorHandler.validationHandler = (schema) => {
     return (req, res, next) => {
-        const { error } = schemaValidatorHandler.validate(req[check], schema);
-
+        const { error } = schemaValidatorHandler.validate(req.body, schema);
         error ? next(boom.badRequest(error)) : next();
     }
 };

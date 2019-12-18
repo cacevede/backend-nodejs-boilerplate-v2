@@ -1,26 +1,33 @@
-const sequelizeDatabaseConnection = require('../../configs/databaseConnection');
+/** VALIDATE DATABASE CONNECTION */
 
-const databaseConValidation = { };
+const { getSequelizeConnection } = require('../../configs/databaseConnection');
+const mongoose = require('mongoose');
 
-databaseConValidation.testSQLConnection = (res, req, next) => {
-    sequelizeDatabaseConnection
+const databaseConnValidator = { };
+
+databaseConnValidator.testSQLConnection = (res) => {
+    getSequelizeConnection
         .authenticate()
         .then(() => {
             res.status(200).json({
-                data: 'Connection to the database has been established successfully'
+                data: 'Connection to the SQL databse has been established successfully'
             });
         })
         .catch((error) => {
             res.status(500).json({
-                data: 'Database connection failed',
+                data: 'SQL database connection failed',
                 error
             });
         });
 };
 
-/** 
- * Add to databaseConValidation object a function 
- * to validate connection to No-SQL database like Mongo
- */
+databaseConnValidator.testNoSQLConnection = (res) => {
+    mongoose.connection.on('error', (error) => {
+        res.status(500).json({
+            data: 'NoSQL database connection failed',
+            error
+        });
+    });
+}
 
- module.exports = databaseConValidation;
+module.exports = databaseConnValidator;

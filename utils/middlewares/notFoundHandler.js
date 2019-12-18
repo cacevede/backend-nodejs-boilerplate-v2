@@ -1,3 +1,5 @@
+/** VALIDATE SERVER ROUTES AND HANDLED 404 SERVER ERROR */
+
 const boom = require('@hapi/boom');
 
 const notFoundHandler = { };
