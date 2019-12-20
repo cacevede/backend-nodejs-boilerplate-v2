@@ -4,9 +4,9 @@
 const Sequelize = require('sequelize');
 const mongoose = require('mongoose');
 
-const config = require('./config');
+const { config } = require('./config');
 
-async function getSequelizeSQLConnection () {
+function getSequelizeSQLConnection () {
     const sequelizeDatabaseConnection = new Sequelize(
         config.dbName,
         config.dbUsername,
