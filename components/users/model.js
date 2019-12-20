@@ -1,9 +1,10 @@
 // SQL model definition throught sequelize ORM
-/**
 const Sequelize = require('sequelize');
-const databaseConnection = require('../../configs/databaseConnection');
 
-const Users = databaseConnection.getSequelizeSQLConnection.define('Users', {
+const { getSequelizeSQLConnection } = require('../../configs/databaseConnection');
+//const { catchErrors } = require('../../utils/middlewares/errorHandlers');
+
+const Users = getSequelizeSQLConnection().define('Users', {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -21,6 +22,5 @@ const Users = databaseConnection.getSequelizeSQLConnection.define('Users', {
     type: Sequelize.STRING(50)
   }
 });
- 
+
 module.exports = Users;
-*/
