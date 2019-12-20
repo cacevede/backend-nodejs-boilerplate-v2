@@ -1,22 +1,16 @@
 /** VALIDATE DATABASE CONNECTION */
 'use strict'
 
-const { getSequelizeConnection } = require('../../configs/databaseConnection');
+//const { getSequelizeSQLConnection } = require('../../configs/databaseConnection');
 const mongoose = require('mongoose');
 
-function testSQLConnection (req, res) {
-    getSequelizeConnection
-        .authenticate()
+function testSQLConnection (dbConnection) {
+    dbConnection.authenticate()
         .then(() => {
-            res.status(200).json({
-                data: 'Connection to the SQL databse has been established successfully'
-            });
+            console.log('Connection to the SQL databse has been established successfully');
         })
         .catch((error) => {
-            res.status(500).json({
-                data: 'SQL database connection failed',
-                error
-            });
+            console.log(`Connection Fail to the SQL database ${error}`);
         });
 };
 
