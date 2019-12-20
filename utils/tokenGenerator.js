@@ -3,13 +3,7 @@
 const jwt = require('jsonwebtoken');
 const { config } = require('../configs/config')
 
-module.exports = async function generateToken (userName, userPassword) {
-  const payloadTokenData = {
-    check: true,
-    userName,
-    userPassword
-  };
-
+module.exports = async function generateToken (payloadTokenData) {
   const token = await jwt.sign(
     payloadTokenData,
     config.authJwtSecret,
