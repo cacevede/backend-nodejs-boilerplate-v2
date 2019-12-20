@@ -111,9 +111,7 @@ Comming soon
 │    │    └── exampleSchema.js
 │    ├── strategies
 │    │    └── someStrategie.js
-│    ├── crypter.js
 │    ├── testServer.js
-│    ├── time.js
 │    └── tokenGenerator.js
 ├── .env
 ├── .eslintrc.json
@@ -154,6 +152,11 @@ Comming soon
 
 - [**sequelize (SQL)**](https://sequelize.org/)
   Sequelize is a promise-based Node.js ORM for Postgres, MySQL, MariaDB, SQLite and Microsoft SQL Server. It features solid transaction support, relations, eager and lazy loading, read replication and more. An ORM facilitate us to manipulate data from a database using an object-oriented paradigm without the need of use SQL directly.
+
+  **IMPORTANT:** When use **sequelize**, must remember the package to connect to SQL databases. In this case in package.json file is already referenced the mysql2 (v2.0.2) package. If you use any other engine, as PostgreSQL or maybe another, must remeber install it
+
+- [**mysql2 (SQL)**](https://github.com/sidorares/node-mysql2#readme)
+  MySQL client for Node.js with focus on performance. Supports prepared statements, non-utf8 encodings, binary log protocol, compression, ssl,...
 
 - [**mongoose (NoSQL)**](https://mongoosejs.com/)
   Mongoose provides a straight-forward, schema-based solution to model our application data. It includes built-in type casting, validation, query building, business logic hooks and more, out of the box. This is maybe the best tool for handling data coming from MongoDB database.
