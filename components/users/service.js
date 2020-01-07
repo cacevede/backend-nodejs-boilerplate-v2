@@ -1,6 +1,7 @@
 'use strict'
 
-const userModel = require('./model');
+// Here, import the Model to be used on this service:
+const { User } = require('../../configs/sequelize');
 
 async function testService (req, res) {
     res.status(200).json({
@@ -13,7 +14,11 @@ async function testService (req, res) {
  * ORM and user model.
  */
 async function searchUsersInDatabase (req, res) {
-    const databaseSearchResult = await userModel.findAll();
+    await User.create({
+        name: 'Santiago'
+    });
+
+    const databaseSearchResult = await User.findAll();
     
     res.status(200).json({
         data: databaseSearchResult

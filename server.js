@@ -14,14 +14,16 @@ const runServer = require('./scripts/serverScript');
 const notFoundHandler = require('./utils/middlewares/notFoundHandler');
 const { logErrors, wrapErrors, errorHandler } = require('./utils/middlewares/errorHandlers');
 const setCorsConfig = require('./utils/middlewares/corsConfig');
+const chalk = require('chalk')
 
-    /** SQL Database Connection - Test */
-const { getSequelizeSQLConnection } = require('./configs/databaseConnection');
-const { testSQLConnection } = require('./utils/middlewares/databaseConValidator');
+/** REQUIRED DATABASE CONNECTION DEPENDENCIE */
+const mongooseConnection = require('./configs/mongoose')
 
 /** INITS */
 const server = express();
-const dbConnection = getSequelizeSQLConnection();
+
+/** MONGOOSE CONNECTION */
+mongooseConnection()
 
 /** MIDDLEWARES */
 
@@ -30,9 +32,6 @@ server.use(cors(setCorsConfig()));
 
     /** Morgan Instance and Winston Integration */
 server.use(morgan('combined', { stream: winstonLogger.stream }));
-    
-    /** Sequelize test database SQL connection */
-testSQLConnection(dbConnection);
 
     /** Body parser set */
 server.use(express.json());
@@ -53,7 +52,11 @@ server.use(errorHandler);
 runServer(server, config.port);
 
 /** PROCCESS HANDLER ERRORS */
-process.on('unhandledRejection', error => {
-    console.log(error)
+function handleFatalError (err) {
+    console.error(`${chalk.red('[fatal error]')} ${err.message}`);
+    console.error(err.stack);
     process.exit(1);
-});
+}
+
+process.on('uncaughtException', handleFatalError);
+process.on('unhandledRejection', handleFatalError);

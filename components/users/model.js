@@ -1,26 +1,12 @@
-// SQL model definition throught sequelize ORM
-const Sequelize = require('sequelize');
+'use strict'
 
-const { getSequelizeSQLConnection } = require('../../configs/databaseConnection');
-//const { catchErrors } = require('../../utils/middlewares/errorHandlers');
-
-const Users = getSequelizeSQLConnection().define('Users', {
-  id: {
-    allowNull: false,
-    autoIncrement: true,
-    primaryKey: true,
-    type: Sequelize.INTEGER(25).ZEROFILL.UNSIGNED
-  },
-  uuid: {
-    allowNull: false,
-    autoIncrement: false,
-    type: Sequelize.UUID,
-    defaultValue: Sequelize.UUIDV4
-  },
-  name: {
-    allowNull: false,
-    type: Sequelize.STRING(50)
-  }
-});
-
-module.exports = Users;
+module.exports = (sequelize, type) => {
+  return sequelize.define('user', {
+      id: {
+        type: type.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+      },
+      name: type.STRING
+  })
+}
