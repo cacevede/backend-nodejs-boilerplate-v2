@@ -1,38 +1,34 @@
 'use strict'
 
-const { config } = require('../../configs/config');
-const boom = require('@hapi/boom');
+const { config } = require('../../config')
+const chalk = require('chalk')
+const boom = require('@hapi/boom')
 
-function catchErrors (fn) {
-    return (req, res, next) => {
-      return fn(req, res, next).catch(next);
-    };
-};
+function withErrorStack(error, stack) {
+  if(config.dev) {
+    return { error, stack }
+  }
+  return error
+}
 
-function withErrorStack (error, stack) {
-    if (config.dev) {
-        return { error, stack };
-    }
-    return error;
-};
+function logErrors(err, req, res, next) {
+  console.log(`${chalk.red('[error]')} ${err}`)  
+  next(err)
+}
 
-function logErrors (error, req, res, next) {
-    console.log(error);
-    next(error)
-};
+function wrapErrors(err, req, res, next) {
+  !err.isBoom ? next(boom.badImplementation(err)) : next(err)
+}
 
-function wrapErrors (error, req, res, next) {
-    !error.isBoom ? next(boom.badImplementation(error)) : next(error);
-};
+function errorHandler(err, req, res, next) { // eslint-disable-line
+  const { output: { statusCode, payload } } = err
 
-function errorHandler (error, req, res) {
-    const { statusCode, payload } = error;
-    res.status(statusCode).json(withErrorStack(payload, error.stack));
-};
+  res.status(statusCode)
+  res.json(withErrorStack(payload, err.stack))
+}
 
 module.exports = {
-    catchErrors,
-    logErrors,
-    wrapErrors,
-    errorHandler
-};
+  logErrors,
+  wrapErrors,
+  errorHandler
+}
